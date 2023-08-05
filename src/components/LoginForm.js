@@ -4,6 +4,10 @@ import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { API, setAuthToken } from "config/api";
 const LoginForm = () => {
+  const history = useHistory();
+  const handleLogin = () => {
+    history.push(`/home`);
+  };
   return (
     <Col>
       <Row>
@@ -47,6 +51,7 @@ const LoginForm = () => {
                     borderRadius: "5px",
                     marginTop: "28px",
                   }}
+                  onClick={handleLogin}
                 >
                   Sign In
                 </Button>

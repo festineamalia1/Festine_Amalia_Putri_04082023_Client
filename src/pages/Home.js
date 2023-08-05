@@ -24,18 +24,35 @@ import Barang from "../assets/images/barang1.jpg";
 export default function Home() {
   const [query, setQuery] = useState("");
   const [show, setShow] = useState(false);
-
   const [show2, setShow2] = useState(false);
+  const [show3, setShow3] = useState(false);
+  const [show4, setShow4] = useState(false);
+
+  const [idDelete, setIdDelete] = useState();
+  const [showDelete, setShowDelete] = useState(false);
 
   const handleClose = () => setShow(false);
+  const handleClose2 = () => setShow2(false);
+  const handleClose3 = () => setShow3(false);
+  const handleClose4 = () => setShow4(false);
   const handleOpen = () => setShow(true);
+  const handleOpen2 = (id) => {
+    setShow2(true);
+    setIdDelete(id);
+  };
+  const handleOpen3 = (id) => {
+    setShow3(true);
+  };
+  const handleOpen4 = (id) => {
+    setShow4(true);
+    setIdDelete(id);
+  };
   const history = useHistory();
 
   const [userId, setUserId] = useState("");
   const [userDataDetail, setUserDataDetail] = useState("");
 
   const handleShow = (id) => {
-   
     handlDetailBarang(id);
     setShow(true);
   };
@@ -43,7 +60,27 @@ export default function Home() {
   const [userData, setUserData] = useState([]);
 
   const [barangData, setBarangData] = useState([]);
-    const [detailBarang, setDetailBarang] = useState([]);
+  const [detailBarang, setDetailBarang] = useState([]);
+
+  const [nama, setNama] = useState();
+  const [foto, setFoto] = useState();
+  const [beli, setBeli] = useState();
+  const [jual, setJual] = useState();
+  const [stok, setStok] = useState();
+  const [admin, setAdmin] = useState();
+
+  const namaBrgEdit = window.localStorage.getItem("Nama");
+  const fotoBrgEdit = window.localStorage.getItem("Nama");
+  const beliBrgEdit = window.localStorage.getItem("Beli");
+  const jualBrgEdit = window.localStorage.getItem("Jual");
+  const stokBrgEdit = window.localStorage.getItem("Stok");
+
+  const [namaEdit, setNamaEdit] = useState(namaBrgEdit ? namaBrgEdit : "");
+  const [fotoEdit, setFotoEdit] = useState(fotoBrgEdit ? fotoBrgEdit : "");
+  const [beliEdit, setBeliEdit] = useState(beliBrgEdit ? beliBrgEdit : "");
+  const [jualEdit, setJualEdit] = useState(jualBrgEdit ? jualBrgEdit : "");
+  const [stokEdit, setStokEdit] = useState(stokBrgEdit ? stokBrgEdit : "");
+  const [adminEdit, setAdminEdit] = useState();
 
   const fetchDataBarang = () => {
     axios
@@ -57,33 +94,63 @@ export default function Home() {
       });
   };
 
-   const handlDetailBarang = (id) => {
-     axios
-       .get(`${API}/barangs/${id}`)
-       .then(function (response) {
-         console.log(response);
-         setDetailBarang(response.data.data[0]);
-       })
-       .catch(function (error) {
-         console.log(error);
-       });
-   };
-
-  const fetchDataUsers = () => {
-    axios.get(`${API}/users`).then((respone) => {
-      setUserData(respone.data.data);
-    });
-  };
-
-  const handleDataDetailUsers = (iduser) => {
-    axios.get(`${API}/users/${iduser}`).then((respone) => {
-      setUserDataDetail(respone.data.data[0]);
-    });
-  };
-
-  const handleDelete = (iduser) => {
+  const handlDetailBarang = (id) => {
     axios
-      .post(`${API}/users/delete/${iduser}`)
+      .get(`${API}/barangs/${id}`)
+      .then(function (response) {
+        console.log(response);
+        setDetailBarang(response.data.data[0]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleTambah = () => {
+    axios
+      .post(`${API}/barangs`, {
+        namabarang: nama,
+        foto: foto,
+        beli: beli,
+        jual: jual,
+        stok: stok,
+        admin: 1,
+      })
+      .then(function (response) {
+        console.log(response);
+        alert("tambah Data Berhasil");
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("tambah Data Gagal");
+      });
+  };
+
+  const handleEdit = () => {
+    axios
+      .post(`${API}/barangs/edit/${idDelete}`, {
+        namabarang: namaEdit,
+        foto: fotoEdit,
+        beli: beliEdit,
+        jual: jualEdit,
+        stok: stokEdit,
+        admin: 1,
+      })
+      .then(function (response) {
+        console.log(response);
+        alert("tambah Data Berhasil");
+        window.location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+        alert("tambah Data Gagal");
+      });
+  };
+
+  const handleDelete = () => {
+    axios
+      .post(`${API}/barangs/delete/${idDelete}`)
       .then(function (response) {
         console.log(response);
         alert("hapus Data Berhasil");
@@ -113,7 +180,7 @@ export default function Home() {
               <Button
                 variant="success"
                 className="mb-3"
-                onClick={() => history.push(`/tambah`)}
+                onClick={() => handleOpen3()}
               >
                 Tambah
               </Button>
@@ -144,24 +211,28 @@ export default function Home() {
                           <Button
                             variant="primary"
                             onClick={() => {
-                              window.localStorage.setItem(
-                                "Nama",
-                                data.namalengkap
-                              );
-                              window.localStorage.setItem(
-                                "User",
-                                data.username
-                              );
-                              window.localStorage.setItem(
-                                "Pass",
-                                data.password
-                              );
-                              window.localStorage.setItem(
-                                "Status",
-                                data.status
-                              );
-                              window.localStorage.setItem("id", data.userid);
-                              history.push(`/edit`);
+                              // window.localStorage.setItem(
+                              //   "Nama",
+                              //   data.nama_barang
+                              // );
+                              // window.localStorage.setItem(
+                              //   "Beli",
+                              //   data.harga_beli
+                              // );
+                              // window.localStorage.setItem(
+                              //   "Jual",
+                              //   data.harga_jual
+                              // );
+                              // window.localStorage.setItem("Stok", data.stok);
+
+                              setNamaEdit(data.nama_barang);
+                              setFotoEdit(data.foto_barang);
+                              setBeliEdit(data.nama_barang);
+                              setJualEdit(data.harga_jual);
+                              setStokEdit(data.stok);
+                              // window.localStorage.setItem("id", data.userid);
+                              // history.push(`/edit`);
+                              handleOpen4(data.id_barang);
                             }}
                           >
                             Edit
@@ -174,7 +245,7 @@ export default function Home() {
                           </Button>{" "}
                           <Button
                             variant="danger"
-                            onClick={() => handleDelete(data.userid)}
+                            onClick={() => handleOpen2(data.id_barang)}
                           >
                             Hapus
                           </Button>{" "}
@@ -190,20 +261,26 @@ export default function Home() {
                 </Modal.Header>
                 <Modal.Body>
                   <div className="container">
+                    <div className=" row ">
+                      <div className="d-flex col justify-contents-center align-items-center">
+                        <img src={Barang} alt=".." />
+                      </div>
+                    </div>
+
                     <div className="row">
-                      <div className="col">Nama</div>
+                      <div className="col">Nama Barang</div>
                       <div className="col">
                         <div>: {detailBarang.nama_barang}</div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col">User Name</div>
+                      <div className="col">Harga Beli</div>
                       <div className="col">
                         <div>: {detailBarang.harga_beli}</div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col">User Name</div>
+                      <div className="col">Harga Jual</div>
                       <div className="col">
                         <div>: {detailBarang.harga_jual}</div>
                       </div>
@@ -220,6 +297,211 @@ export default function Home() {
                   <Button variant="secondary" onClick={handleClose}>
                     Close
                   </Button>
+                </Modal.Footer>
+              </Modal>
+
+              <Modal show={show2} onHide={handleClose2}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Alert</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="container">
+                    <div className=" row ">
+                      <div className="d-flex col justify-contents-center align-items-center">
+                        <div>Anda Yakin akan Menghapus data barang ini ?</div>
+                      </div>
+                    </div>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <div className="d-flex row justify-contents-center align-items-center">
+                    <Button
+                      variant="info"
+                      onClick={handleClose2}
+                      className="mr-2"
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button variant="danger" onClick={() => handleDelete()}>
+                      Hapus
+                    </Button>
+                  </div>
+                </Modal.Footer>
+              </Modal>
+
+              <Modal show={show3} onHide={handleClose3}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Tambah Barang</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col">
+                        <label>Nama Barang</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Nama Barang"
+                          value={nama}
+                          onChange={(e) => setNama(e.target.value)}
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Foto Barang</label>
+                        <div class="input-group mb-3">
+                          <div class="custom-file">
+                            <input
+                              type="file"
+                              class="custom-file-input"
+                              id="inputGroupFile02"
+                            />
+                            <label
+                              class="custom-file-label"
+                              for="inputGroupFile02"
+                            >
+                              Choose file
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row mt-4">
+                      <div className="col">
+                        <label>Harga Beli</label>
+                        <input
+                          class="form-control"
+                          type="number"
+                          placeholder="0"
+                          value={beli}
+                          onChange={(e) => setBeli(e.target.value)}
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Harga Jual</label>
+                        <input
+                          class="form-control"
+                          type="number"
+                          placeholder="0"
+                          value={jual}
+                          onChange={(e) => setJual(e.target.value)}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="row mt-4 px-3">
+                      <label>Stok</label>
+                      <input
+                        class="form-control"
+                        type="number"
+                        placeholder="0"
+                        value={stok}
+                        onChange={(e) => setStok(e.target.value)}
+                      ></input>
+                    </div>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <div className="d-flex row justify-contents-center align-items-center">
+                    <Button
+                      variant="light"
+                      onClick={handleClose3}
+                      className="mr-2"
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button variant="success" onClick={() => handleTambah()}>
+                      Tambah
+                    </Button>
+                  </div>
+                </Modal.Footer>
+              </Modal>
+
+              <Modal show={show4} onHide={handleClose4}>
+                <Modal.Header closeButton>
+                  <Modal.Title>Edit Barang</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                  <div className="container">
+                    <div className="row">
+                      <div className="col">
+                        <label>Nama Barang</label>
+                        <input
+                          class="form-control"
+                          type="text"
+                          placeholder="Nama Barang"
+                          value={namaEdit}
+                          onChange={(e) => setNamaEdit(e.target.value)}
+                        ></input>
+                      </div>
+
+                      <div className="col">
+                        <label>Foto Barang</label>
+                        <div class="input-group mb-3">
+                          <div class="custom-file">
+                            <input
+                              type="file"
+                              class="custom-file-input"
+                              id="inputGroupFile02"
+                            />
+                            <label
+                              class="custom-file-label"
+                              for="inputGroupFile02"
+                            >
+                              Choose file
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="row mt-4">
+                      <div className="col">
+                        <label>Harga Beli</label>
+                        <input
+                          class="form-control"
+                          type="number"
+                          placeholder="0"
+                          value={beliEdit}
+                          onChange={(e) => setBeliEdit(e.target.value)}
+                        ></input>
+                      </div>
+                      <div className="col">
+                        <label>Harga Jual</label>
+                        <input
+                          class="form-control"
+                          type="number"
+                          placeholder="0"
+                          value={jualEdit}
+                          onChange={(e) => setJualEdit(e.target.value)}
+                        ></input>
+                      </div>
+                    </div>
+                    <div className="row mt-4 px-3">
+                      <label>Stok</label>
+                      <input
+                        class="form-control"
+                        type="number"
+                        placeholder="0"
+                        value={stokEdit}
+                        onChange={(e) => setStokEdit(e.target.value)}
+                      ></input>
+                    </div>
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <div className="d-flex row justify-contents-center align-items-center">
+                    <Button
+                      variant="light"
+                      onClick={handleClose4}
+                      className="mr-2"
+                    >
+                      Cancel
+                    </Button>
+
+                    <Button variant="primary" onClick={() => handleEdit()}>
+                      Edit
+                    </Button>
+                  </div>
                 </Modal.Footer>
               </Modal>
             </div>
