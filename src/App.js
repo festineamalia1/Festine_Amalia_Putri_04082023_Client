@@ -1,22 +1,15 @@
-import React, { useEffect,  } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { HashRouter as Router, Route } from "react-router-dom";
 import LandingPage from "pages/LandingPage";
 import Home from "pages/Home";
-
 
 import "assets/scss/style.scss";
 import { API, setAuthToken } from "config/api";
 import Switch from "react-bootstrap/esm/Switch";
 
-
-
 import "./App.css";
 
-
-
 function App() {
-  
-  
   return (
     <div className="App">
       <Router>
