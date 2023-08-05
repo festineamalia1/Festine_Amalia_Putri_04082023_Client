@@ -123,7 +123,9 @@ export default function Home() {
       })
       .catch(function (error) {
         console.log(error);
-        alert("tambah Data Gagal");
+        alert(
+          "tambah Data Gagal, Nama Barang Pastikan berbeda, untuk harga beli, harga jual dan stok hanya dapat di isi angka"
+        );
       });
   };
 
@@ -144,7 +146,9 @@ export default function Home() {
       })
       .catch(function (error) {
         console.log(error);
-        alert("tambah Data Gagal");
+        alert(
+          "tambah Data Gagal. Nama Barang Pastikan berbeda, untuk harga beli, harga jual dan stok hanya dapat di isi angka"
+        );
       });
   };
 
@@ -160,6 +164,13 @@ export default function Home() {
         console.log(error);
         alert("hapus Data Gagal");
       });
+  };
+
+  const [files, setFiles] = useState();
+
+  const onChangeFiles = (e) => {
+    console.log("file", e.target.files[0]);
+    setFiles(e.target.files[0]);
   };
 
   console.log("barangData", barangData);
@@ -201,7 +212,7 @@ export default function Home() {
                       <tr>
                         <td>{data.nama_barang}</td>
                         <td>
-                          <img src={Barang} alt="" />
+                          <img src="../assets/images/barang1.jpg" alt="" />
                         </td>
                         <td>{data.harga_beli}</td>
                         <td>{data.harga_jual}</td>
@@ -348,21 +359,34 @@ export default function Home() {
                         ></input>
                       </div>
                       <div className="col">
-                        <label>Foto Barang</label>
-                        <div class="input-group mb-3">
-                          <div class="custom-file">
-                            <input
-                              type="file"
-                              class="custom-file-input"
-                              id="inputGroupFile02"
-                            />
-                            <label
-                              class="custom-file-label"
-                              for="inputGroupFile02"
-                            >
-                              Choose file
-                            </label>
+                        <div className="row">
+                          <label>Foto Barang</label>
+                          <div class="input-group mb-3">
+                            <div class="custom-file">
+                              <input
+                                type="file"
+                                class="custom-file-input"
+                                id="inputGroupFile02"
+                                onChange={(e) => {
+                                  onChangeFiles(e);
+                                }}
+                              />
+                              <label
+                                class="custom-file-label"
+                                for="inputGroupFile02"
+                              >
+                                {files ? files.name : "Choose file"}
+                              </label>
+                            </div>
                           </div>
+                        </div>
+                        <div className="row">
+                          {" "}
+                          <span className="eror">
+                            {files && files.size > 100000
+                              ? "maksimal foto 100KB"
+                              : ""}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -410,7 +434,11 @@ export default function Home() {
                       Cancel
                     </Button>
 
-                    <Button variant="success" onClick={() => handleTambah()}>
+                    <Button
+                      variant="success"
+                      onClick={() => handleTambah()}
+                      disabled={files && files.size > 100000 ? true : false}
+                    >
                       Tambah
                     </Button>
                   </div>
@@ -436,20 +464,32 @@ export default function Home() {
                       </div>
 
                       <div className="col">
-                        <label>Foto Barang</label>
-                        <div class="input-group mb-3">
-                          <div class="custom-file">
-                            <input
-                              type="file"
-                              class="custom-file-input"
-                              id="inputGroupFile02"
-                            />
-                            <label
-                              class="custom-file-label"
-                              for="inputGroupFile02"
-                            >
-                              Choose file
-                            </label>
+                        <div className="row">
+                          <label>Foto Barang</label>
+                          <div class="input-group mb-3">
+                            <div class="custom-file">
+                              <input
+                                type="file"
+                                class="custom-file-input"
+                                id="inputGroupFile02"
+                              />
+                              <label
+                                class="custom-file-label"
+                                for="inputGroupFile02"
+                              >
+                                {files ? files.name : "Choose file"}
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="row">
+                            {" "}
+                            <span className="eror">
+                              {files && files.size > 100000
+                                ? "maksimal foto 100KB"
+                                : ""}
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -498,7 +538,11 @@ export default function Home() {
                       Cancel
                     </Button>
 
-                    <Button variant="primary" onClick={() => handleEdit()}>
+                    <Button
+                      variant="primary"
+                      onClick={() => handleEdit()}
+                      disabled={files && files.size > 100000 ? true : false}
+                    >
                       Edit
                     </Button>
                   </div>
