@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/Festine_Amalia_Putri_04082023_Client/precache-manifest.a46295d151b1fa55921f5e3d8dbe37cd.js"
+  "/Festine_Amalia_Putri_04082023_Client/precache-manifest.6c872e451c457351cb1260abd2d8d176.js"
 );
 
 self.addEventListener('message', (event) => {
