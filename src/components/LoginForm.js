@@ -1,21 +1,9 @@
-import React, { useState, useContext } from "react";
-import { TaskContext } from "context/TaskContext";
+import React, { useState } from "react";
 
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { API, setAuthToken } from "config/api";
 const LoginForm = () => {
-  const [state, dispatch] = useContext(TaskContext);
-  const history = useHistory();
-
-  const [userName, setUserName] = useState("Nama1");
-  const [password, setPassword] = useState("12345678");
-  console.log("userName user", userName);
-  console.log("password user", password);
-
-  const handleLogin = () => {
-    history.push(`/home`);
-  };
   return (
     <Col>
       <Row>
@@ -36,8 +24,6 @@ const LoginForm = () => {
                   name="userName"
                   required
                   placeholder="UserName"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
                 />
               </Form.Group>
               <Form.Label htmlFor="inputPassword5">Password</Form.Label>
@@ -47,8 +33,6 @@ const LoginForm = () => {
                   name="password"
                   required
                   placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
               <Link>
@@ -63,7 +47,6 @@ const LoginForm = () => {
                     borderRadius: "5px",
                     marginTop: "28px",
                   }}
-                  onClick={handleLogin}
                 >
                   Sign In
                 </Button>

@@ -1,9 +1,7 @@
 import axios from "axios";
 
 // Set config defaults when creating the instance || Base URL
-export const API = axios.create({
-  baseURL: "http://localhost:5000/api/v1",
-});
+export const API = "http://localhost:8080";
 
 // Alter defaults after instance has been created || Integrate default header for auth
 export const setAuthToken = (token) => {

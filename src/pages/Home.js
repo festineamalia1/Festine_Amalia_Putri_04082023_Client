@@ -15,9 +15,11 @@ import {
 } from "react-bootstrap";
 import { useParams, Link, useHistory, useLocation } from "react-router-dom";
 import { API } from "config/api";
-import { TaskContext } from "../context/TaskContext";
+
 import { useQuery, useMutation } from "react-query";
 import axios from "axios";
+
+import Barang from "../assets/images/barang1.jpg";
 
 export default function Home() {
   const [query, setQuery] = useState("");
@@ -33,30 +35,55 @@ export default function Home() {
   const [userDataDetail, setUserDataDetail] = useState("");
 
   const handleShow = (id) => {
-    setUserId(id);
-    handleDataDetailUsers(id);
+   
+    handlDetailBarang(id);
     setShow(true);
   };
   console.log("userId", userId);
   const [userData, setUserData] = useState([]);
 
-  const baseURL = "http://localhost:8080";
+  const [barangData, setBarangData] = useState([]);
+    const [detailBarang, setDetailBarang] = useState([]);
+
+  const fetchDataBarang = () => {
+    axios
+      .get(`${API}/barangs`)
+      .then(function (response) {
+        console.log(response);
+        setBarangData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+   const handlDetailBarang = (id) => {
+     axios
+       .get(`${API}/barangs/${id}`)
+       .then(function (response) {
+         console.log(response);
+         setDetailBarang(response.data.data[0]);
+       })
+       .catch(function (error) {
+         console.log(error);
+       });
+   };
 
   const fetchDataUsers = () => {
-    axios.get(`${baseURL}/users`).then((respone) => {
+    axios.get(`${API}/users`).then((respone) => {
       setUserData(respone.data.data);
     });
   };
 
   const handleDataDetailUsers = (iduser) => {
-    axios.get(`${baseURL}/users/${iduser}`).then((respone) => {
+    axios.get(`${API}/users/${iduser}`).then((respone) => {
       setUserDataDetail(respone.data.data[0]);
     });
   };
 
   const handleDelete = (iduser) => {
     axios
-      .post(`${baseURL}/users/delete/${iduser}`)
+      .post(`${API}/users/delete/${iduser}`)
       .then(function (response) {
         console.log(response);
         alert("hapus Data Berhasil");
@@ -68,9 +95,9 @@ export default function Home() {
       });
   };
 
-  console.log("userDataDetail", userDataDetail);
+  console.log("barangData", barangData);
   useEffect(() => {
-    fetchDataUsers();
+    fetchDataBarang();
   }, []);
 
   return (
@@ -93,19 +120,25 @@ export default function Home() {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>Nama Lengkap</th>
-                    <th>User Name</th>
-                    <th>Status</th>
+                    <th>Nama Barang</th>
+                    <th>Foto Barang</th>
+                    <th>Harga Beli</th>
+                    <th>Harga Jual</th>
+                    <th>Stok</th>
                     <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {userData &&
-                    userData.map((data, i) => (
+                  {barangData &&
+                    barangData.map((data, i) => (
                       <tr>
-                        <td>{data.namalengkap}</td>
-                        <td>{data.username}</td>
-                        <td>{data.status}</td>
+                        <td>{data.nama_barang}</td>
+                        <td>
+                          <img src={Barang} alt="" />
+                        </td>
+                        <td>{data.harga_beli}</td>
+                        <td>{data.harga_jual}</td>
+                        <td>{data.stok}</td>
                         <td>
                           {" "}
                           <Button
@@ -135,7 +168,7 @@ export default function Home() {
                           </Button>{" "}
                           <Button
                             variant="info"
-                            onClick={() => handleShow(data.userid)}
+                            onClick={() => handleShow(data.id_barang)}
                           >
                             Lihat
                           </Button>{" "}
@@ -160,19 +193,25 @@ export default function Home() {
                     <div className="row">
                       <div className="col">Nama</div>
                       <div className="col">
-                        <div>: {userDataDetail.namalengkap}</div>
+                        <div>: {detailBarang.nama_barang}</div>
                       </div>
                     </div>
                     <div className="row">
                       <div className="col">User Name</div>
                       <div className="col">
-                        <div>: {userDataDetail.username}</div>
+                        <div>: {detailBarang.harga_beli}</div>
                       </div>
                     </div>
                     <div className="row">
-                      <div className="col">Status</div>
+                      <div className="col">User Name</div>
                       <div className="col">
-                        <div>: {userDataDetail.status}</div>
+                        <div>: {detailBarang.harga_jual}</div>
+                      </div>
+                    </div>
+                    <div className="row">
+                      <div className="col">Stok</div>
+                      <div className="col">
+                        <div>: {detailBarang.stok}</div>
                       </div>
                     </div>
                   </div>

@@ -13,7 +13,7 @@ import {
   Tooltip,
 } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
-import { TaskContext } from "context/TaskContext";
+
 import Profil from "assets/images/usernav.png";
 import Logout from "assets/images/logout.svg";
 import { API } from "config/api";
@@ -21,8 +21,7 @@ import { API } from "config/api";
 import { useQuery, useMutation } from "react-query";
 export default function NavBar(props) {
   const [show, setShow] = useState(false);
-  const target = useRef(null);
-  const [state, dispatch] = useContext(TaskContext);
+
   const history = useHistory();
 
   return (
@@ -74,11 +73,15 @@ export default function NavBar(props) {
               <img
                 src={Profil}
                 alt="profil"
-                ref={target}
+                //  ref={target}
                 onClick={() => setShow(!show)}
                 className="ft-setting"
               />
-              <Overlay target={target.current} show={show} placement="bottom">
+              <Overlay
+                //  target={target.current}
+                show={show}
+                placement="bottom"
+              >
                 {(props) => (
                   <Tooltip id="overlay-example" {...props}>
                     <Nav style={{ color: "white" }}>
