@@ -68,7 +68,7 @@ export default function Home() {
   const [jual, setJual] = useState();
   const [stok, setStok] = useState();
   const [admin, setAdmin] = useState();
-   const [searchData, setSearchData] = useState();
+  const [searchData, setSearchData] = useState();
 
   const namaBrgEdit = window.localStorage.getItem("Nama");
   const fotoBrgEdit = window.localStorage.getItem("Nama");
@@ -76,12 +76,14 @@ export default function Home() {
   const jualBrgEdit = window.localStorage.getItem("Jual");
   const stokBrgEdit = window.localStorage.getItem("Stok");
 
-  const [namaEdit, setNamaEdit] = useState(namaBrgEdit ? namaBrgEdit : "");
-  const [fotoEdit, setFotoEdit] = useState(fotoBrgEdit ? fotoBrgEdit : "");
-  const [beliEdit, setBeliEdit] = useState(beliBrgEdit ? beliBrgEdit : "");
-  const [jualEdit, setJualEdit] = useState(jualBrgEdit ? jualBrgEdit : "");
-  const [stokEdit, setStokEdit] = useState(stokBrgEdit ? stokBrgEdit : "");
+  const [namaEdit, setNamaEdit] = useState("");
+  const [fotoEdit, setFotoEdit] = useState("");
+  const [beliEdit, setBeliEdit] = useState(0);
+  const [jualEdit, setJualEdit] = useState(0);
+  const [stokEdit, setStokEdit] = useState(0);
   const [adminEdit, setAdminEdit] = useState();
+
+  console.log("beliEdit", beliEdit);
 
   const fetchDataBarang = () => {
     axios
@@ -146,7 +148,7 @@ export default function Home() {
     axios
       .post(`${API}/barangs/edit/${idDelete}`, {
         namabarang: namaEdit,
-        foto: files.name,
+        foto: "barang5.jpg",
         beli: beliEdit,
         jual: jualEdit,
         stok: stokEdit,
@@ -289,7 +291,7 @@ export default function Home() {
 
                               setNamaEdit(data.nama_barang);
                               setFotoEdit(data.foto_barang);
-                              setBeliEdit(data.nama_barang);
+                              setBeliEdit(data.harga_beli);
                               setJualEdit(data.harga_jual);
                               setStokEdit(data.stok);
                               // window.localStorage.setItem("id", data.userid);
@@ -539,7 +541,11 @@ export default function Home() {
                                 class="custom-file-label"
                                 for="inputGroupFile02"
                               >
-                                {files ? files.name : "Choose file"}
+                                {files
+                                  ? files.name
+                                  : fotoEdit
+                                  ? fotoEdit
+                                  : "Choose file"}
                               </label>
                             </div>
                           </div>
