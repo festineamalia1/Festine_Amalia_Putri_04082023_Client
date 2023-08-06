@@ -47,16 +47,7 @@ const NavBar = (props) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
               <div style={{ marginTop: 20, marginLeft: 250, width: "550px" }}>
-                <Form>
-                  <Form.Group controlId="Search">
-                    <Form.Control
-                      type="text"
-                      name="Search"
-                      required
-                      placeholder="Search"
-                    />
-                  </Form.Group>
-                </Form>
+               
               </div>
             </Nav>
             <Nav>

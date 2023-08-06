@@ -68,6 +68,7 @@ export default function Home() {
   const [jual, setJual] = useState();
   const [stok, setStok] = useState();
   const [admin, setAdmin] = useState();
+   const [searchData, setSearchData] = useState();
 
   const namaBrgEdit = window.localStorage.getItem("Nama");
   const fotoBrgEdit = window.localStorage.getItem("Nama");
@@ -85,6 +86,18 @@ export default function Home() {
   const fetchDataBarang = () => {
     axios
       .get(`${API}/barangs`)
+      .then(function (response) {
+        console.log(response);
+        setBarangData(response.data.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const handleSearchBarang = () => {
+    axios
+      .get(`${API}/search/${searchData}`)
       .then(function (response) {
         console.log(response);
         setBarangData(response.data.data);
@@ -178,6 +191,8 @@ export default function Home() {
     fetchDataBarang();
   }, []);
 
+  console.log("searchData", searchData);
+
   return (
     <>
       <div className="container">
@@ -188,13 +203,41 @@ export default function Home() {
             </div>
 
             <div className="mt-5">
-              <Button
-                variant="success"
-                className="mb-3"
-                onClick={() => handleOpen3()}
-              >
-                Tambah
-              </Button>
+              <div className="row">
+                <div className="col col-auto">
+                  <Button
+                    variant="success"
+                    className="mb-3"
+                    onClick={() => handleOpen3()}
+                  >
+                    Tambah
+                  </Button>
+                </div>
+                <div className="col">
+                  <Form>
+                    <Form.Group controlId="Search">
+                      <Form.Control
+                        type="text"
+                        name="Search"
+                        required
+                        placeholder="Search"
+                        value={searchData}
+                        onChange={(e) => setSearchData(e.target.value)}
+                      />
+                    </Form.Group>
+                  </Form>
+                </div>
+                <div className="col col-auto">
+                  <Button
+                    variant="warning"
+                    className="mb-3"
+                    onClick={() => handleSearchBarang()}
+                  >
+                    Search
+                  </Button>
+                </div>
+              </div>
+
               <Table striped bordered hover>
                 <thead>
                   <tr>
@@ -282,7 +325,15 @@ export default function Home() {
                   <div className="container">
                     <div className=" row ">
                       <div className="d-flex col justify-contents-center align-items-center">
-                        <img src={Barang} alt=".." />
+                        <img
+                          src={require(`../assets/images/${
+                            detailBarang.foto_barang
+                              ? detailBarang.foto_barang
+                              : "barang5.jpg"
+                          }`)}
+                          alt=".."
+                          className="img-barang"
+                        />
                       </div>
                     </div>
 
