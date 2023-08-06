@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Festine_Amalia_Putri_04082023_Client/static/css/main.ec86f750.chunk.css",
-    "main.js": "/Festine_Amalia_Putri_04082023_Client/static/js/main.1e6708f6.chunk.js",
-    "main.js.map": "/Festine_Amalia_Putri_04082023_Client/static/js/main.1e6708f6.chunk.js.map",
+    "main.js": "/Festine_Amalia_Putri_04082023_Client/static/js/main.aac6f6c5.chunk.js",
+    "main.js.map": "/Festine_Amalia_Putri_04082023_Client/static/js/main.aac6f6c5.chunk.js.map",
     "runtime-main.js": "/Festine_Amalia_Putri_04082023_Client/static/js/runtime-main.7a2c0f71.js",
     "runtime-main.js.map": "/Festine_Amalia_Putri_04082023_Client/static/js/runtime-main.7a2c0f71.js.map",
-    "static/js/2.ae1384a2.chunk.js": "/Festine_Amalia_Putri_04082023_Client/static/js/2.ae1384a2.chunk.js",
-    "static/js/2.ae1384a2.chunk.js.map": "/Festine_Amalia_Putri_04082023_Client/static/js/2.ae1384a2.chunk.js.map",
+    "static/js/2.2e8db164.chunk.js": "/Festine_Amalia_Putri_04082023_Client/static/js/2.2e8db164.chunk.js",
+    "static/js/2.2e8db164.chunk.js.map": "/Festine_Amalia_Putri_04082023_Client/static/js/2.2e8db164.chunk.js.map",
     "index.html": "/Festine_Amalia_Putri_04082023_Client/index.html",
-    "precache-manifest.d8b9127a300316af7f44c25b67968ce0.js": "/Festine_Amalia_Putri_04082023_Client/precache-manifest.d8b9127a300316af7f44c25b67968ce0.js",
+    "precache-manifest.3ac023c354251b60533f88c0d97149f3.js": "/Festine_Amalia_Putri_04082023_Client/precache-manifest.3ac023c354251b60533f88c0d97149f3.js",
     "service-worker.js": "/Festine_Amalia_Putri_04082023_Client/service-worker.js",
     "static/css/main.ec86f750.chunk.css.map": "/Festine_Amalia_Putri_04082023_Client/static/css/main.ec86f750.chunk.css.map",
-    "static/js/2.ae1384a2.chunk.js.LICENSE.txt": "/Festine_Amalia_Putri_04082023_Client/static/js/2.ae1384a2.chunk.js.LICENSE.txt",
+    "static/js/2.2e8db164.chunk.js.LICENSE.txt": "/Festine_Amalia_Putri_04082023_Client/static/js/2.2e8db164.chunk.js.LICENSE.txt",
     "static/media/barang2.jpg": "/Festine_Amalia_Putri_04082023_Client/static/media/barang2.dc4fc6c6.jpg",
     "static/media/barang3.jpg": "/Festine_Amalia_Putri_04082023_Client/static/media/barang3.3b9d3eb1.jpg",
     "static/media/barang5.jpg": "/Festine_Amalia_Putri_04082023_Client/static/media/barang5.3a07ccaf.jpg",
@@ -22,8 +22,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.7a2c0f71.js",
-    "static/js/2.ae1384a2.chunk.js",
+    "static/js/2.2e8db164.chunk.js",
     "static/css/main.ec86f750.chunk.css",
-    "static/js/main.1e6708f6.chunk.js"
+    "static/js/main.aac6f6c5.chunk.js"
   ]
 }
