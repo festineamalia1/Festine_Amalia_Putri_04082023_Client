@@ -4,26 +4,6 @@ const intialState = {
   error: "",
 };
 
-{
-  /*
-const reducer = (state = intialState, action) => {
-
-    switch (action.type) {
-        case "INCREMENT":
-            return { ...state, num: state.num + 1 }
-        case "FetchData":
-            return { ...state, data: action.data }
-        case "ERROR":
-            return { ...state, error: action.msg }
-        default:
-            return state
-    }
-
-}
-*/
-}
-
-
 const reducer = (state = { status: "logged out", value: "guest" }, action) => {
   switch (action.type) {
     case "LOGIN":
@@ -41,6 +21,5 @@ const reducer = (state = { status: "logged out", value: "guest" }, action) => {
       return state;
   }
 };
-
 
 export default reducer;
