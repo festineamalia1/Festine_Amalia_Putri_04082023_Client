@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "77bb50d3c2cad2a80410927c15b776c8",
+    "revision": "26505eab42086810dfff88dabeee6e9c",
     "url": "/Festine_Amalia_Putri_04082023_Client/index.html"
   },
   {
-    "revision": "25dea53713a3ab888165",
+    "revision": "d1f19921d77d62e1438f",
     "url": "/Festine_Amalia_Putri_04082023_Client/static/css/main.ec86f750.chunk.css"
   },
   {
-    "revision": "1e5b882d32d6b52f059f",
-    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/2.ae1384a2.chunk.js"
+    "revision": "e38db08c1f83346c1298",
+    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/2.2e8db164.chunk.js"
   },
   {
     "revision": "d7d5d466de08c7c189c349ac9206fbcf",
-    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/2.ae1384a2.chunk.js.LICENSE.txt"
+    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/2.2e8db164.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "25dea53713a3ab888165",
-    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/main.1e6708f6.chunk.js"
+    "revision": "d1f19921d77d62e1438f",
+    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/main.aac6f6c5.chunk.js"
   },
   {
     "revision": "5dd8975803f86b7efcd5",
