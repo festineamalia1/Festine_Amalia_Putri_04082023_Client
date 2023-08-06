@@ -6,7 +6,7 @@ import Home from "pages/Home";
 import "assets/scss/style.scss";
 import { API, setAuthToken } from "config/api";
 import Switch from "react-bootstrap/esm/Switch";
-
+import PrivateRoute from "components/PrivateRoute";
 import "./App.css";
 
 function App() {

@@ -1,5 +1,4 @@
-import axios from "axios";
-
+import { useParams, Link, useHistory, useLocation } from "react-router-dom";
 export const increment = () => {
   return {
     type: "INCREMENT",
@@ -16,4 +15,33 @@ export const fetchData = () => {
   };
 };
 
+const StatusLog = window.localStorage.getItem("LogStatus");
 
+export const handleLogin = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "LOGIN",
+    });
+  };
+};
+
+export const handleLogout = () => {
+  return (dispatch) => {
+    dispatch({
+      type: "LOGOUT",
+    });
+    window.location.assign("/");
+  };
+};
+
+{
+  /*
+export const handleLogin = () => {
+   return (dispatch) => {
+     dispatch({
+       type: "LOGIN",
+     });
+   }
+};
+*/
+}

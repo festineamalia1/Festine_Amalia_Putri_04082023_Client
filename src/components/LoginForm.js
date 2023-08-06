@@ -1,12 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { Container, Row, Col, Button, Form, Modal } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { API, setAuthToken } from "config/api";
-const LoginForm = () => {
+import { connect } from "react-redux";
+import { handleLogin } from "actions";
+const LoginForm = (props) => {
   const history = useHistory();
-  const handleLogin = () => {
-    history.push(`/home`);
+  // const handleLogin = () => {
+  //   history.push(`/home`);
+  // };
+
+  const [userName, setUserName] = useState("admin");
+  const [password, setPasword] = useState("admin");
+
+  console.log("statusLog", props.statusLog);
+
+  // useEffect(() => {
+  //   props.onHandleLogin()
+  // }, []);
+  const StatusLog = window.localStorage.getItem("LogStatus");
+  const handleRedirect = () => {
+    window.location.reload();
   };
   return (
     <Col>
@@ -28,6 +43,8 @@ const LoginForm = () => {
                   name="userName"
                   required
                   placeholder="UserName"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
                 />
               </Form.Group>
               <Form.Label htmlFor="inputPassword5">Password</Form.Label>
@@ -37,6 +54,8 @@ const LoginForm = () => {
                   name="password"
                   required
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPasword(e.target.value)}
                 />
               </Form.Group>
               <Link>
@@ -51,7 +70,10 @@ const LoginForm = () => {
                     borderRadius: "5px",
                     marginTop: "28px",
                   }}
-                  onClick={handleLogin}
+                  onClick={() => {
+                    history.push("/home");
+                    props.onHandleLogin();
+                  }}
                 >
                   Sign In
                 </Button>
@@ -63,4 +85,13 @@ const LoginForm = () => {
     </Col>
   );
 };
-export default LoginForm;
+
+const mapStatetoProps = (state) => {
+  return { statusLog: state.status };
+};
+
+const mapDispatchprops = (dispatch) => {
+  return { onHandleLogin: () => dispatch(handleLogin()) };
+};
+
+export default connect(mapStatetoProps, mapDispatchprops)(LoginForm);

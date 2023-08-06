@@ -1,4 +1,5 @@
 import React, { useState, useRef, useContext } from "react";
+import { connect } from "react-redux";
 import {
   Container,
   Row,
@@ -19,9 +20,9 @@ import Logout from "assets/images/logout.svg";
 import { API } from "config/api";
 
 import { useQuery, useMutation } from "react-query";
-export default function NavBar(props) {
+const NavBar = (props) => {
   const [show, setShow] = useState(false);
-
+  const target = useRef(null);
   const history = useHistory();
 
   return (
@@ -65,23 +66,12 @@ export default function NavBar(props) {
                   {/* <div className="col">Add Video</div> */}
                 </div>
               </Nav.Link>
-              {/*
-            <Button ref={target} onClick={() => setShow(!show)}>
-              ...
-            </Button>
-            */}
-              <img
-                src={Profil}
-                alt="profil"
-                //  ref={target}
-                onClick={() => setShow(!show)}
-                className="ft-setting"
-              />
-              <Overlay
-                //  target={target.current}
-                show={show}
-                placement="bottom"
-              >
+
+              <Button ref={target} onClick={() => setShow(!show)}>
+                Menu
+              </Button>
+
+              <Overlay target={target.current} show={show} placement="bottom">
                 {(props) => (
                   <Tooltip id="overlay-example" {...props}>
                     <Nav style={{ color: "white" }}>
@@ -115,3 +105,9 @@ export default function NavBar(props) {
     </>
   );
 }
+
+const mapStatetoProps = (state) => {
+  return { statusLog: state.status };
+};
+
+export default connect(mapStatetoProps)(NavBar);

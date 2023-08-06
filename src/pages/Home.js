@@ -110,7 +110,7 @@ export default function Home() {
     axios
       .post(`${API}/barangs`, {
         namabarang: nama,
-        foto: foto,
+        foto: "barang5.jpg",
         beli: beli,
         jual: jual,
         stok: stok,
@@ -133,7 +133,7 @@ export default function Home() {
     axios
       .post(`${API}/barangs/edit/${idDelete}`, {
         namabarang: namaEdit,
-        foto: fotoEdit,
+        foto: files.name,
         beli: beliEdit,
         jual: jualEdit,
         stok: stokEdit,
@@ -212,7 +212,15 @@ export default function Home() {
                       <tr>
                         <td>{data.nama_barang}</td>
                         <td>
-                          <img src="../assets/images/barang1.jpg" alt="" />
+                          <img
+                            src={require(`../assets/images/${
+                              data.foto_barang
+                                ? data.foto_barang
+                                : `barang1.jpg`
+                            }`)}
+                            alt=""
+                            className="img-barang"
+                          />
                         </td>
                         <td>{data.harga_beli}</td>
                         <td>{data.harga_jual}</td>
@@ -472,6 +480,9 @@ export default function Home() {
                                 type="file"
                                 class="custom-file-input"
                                 id="inputGroupFile02"
+                                onChange={(e) => {
+                                  onChangeFiles(e);
+                                }}
                               />
                               <label
                                 class="custom-file-label"
