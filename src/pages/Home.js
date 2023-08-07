@@ -12,6 +12,7 @@ import {
   Form,
   Table,
   Modal,
+  Spinner,
 } from "react-bootstrap";
 import { useParams, Link, useHistory, useLocation } from "react-router-dom";
 import { API } from "config/api";
@@ -82,13 +83,16 @@ export default function Home() {
   const [jualEdit, setJualEdit] = useState(0);
   const [stokEdit, setStokEdit] = useState(0);
   const [adminEdit, setAdminEdit] = useState();
+  const [isLoading, setIsLoading] = useState(false);
 
   console.log("beliEdit", beliEdit);
 
   const fetchDataBarang = () => {
+    setIsLoading(true);
     axios
       .get(`${API}/barang`)
       .then(function (response) {
+        setIsLoading(false);
         console.log(response);
         setBarangData(response.data.data);
       })
@@ -98,9 +102,11 @@ export default function Home() {
   };
 
   const handleSearchBarang = () => {
+    setIsLoading(true);
     axios
       .get(`${API}/search/${searchData}`)
       .then(function (response) {
+        setIsLoading(false);
         console.log(response);
         setBarangData(response.data.data);
       })
@@ -257,85 +263,96 @@ export default function Home() {
                   </Button>
                 </div>
               </div>
+              {isLoading == true ? (
+                <div className=" d-flex row justify-contens-center align-items-center mt-5">
+                  <div className=" d-flex col justify-contens-center align-items-center mt-5">
+                    <Spinner
+                      animation="border"
+                      variant="info"
+                      className="spinner"
+                    />
+                  </div>
+                </div>
+              ) : (
+                <Table striped bordered hover>
+                  <thead>
+                    <tr>
+                      <th>Nama Barang</th>
+                      <th>Foto Barang</th>
+                      <th>Harga Beli</th>
+                      <th>Harga Jual</th>
+                      <th>Stok</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {barangData &&
+                      barangData.map((data, i) => (
+                        <tr>
+                          <td>{data.nama_barang}</td>
+                          <td>
+                            <img
+                              src={require(`../assets/images/${
+                                data.foto_barang
+                                  ? data.foto_barang
+                                  : `barang1.jpg`
+                              }`)}
+                              alt=""
+                              className="img-barang"
+                            />
+                          </td>
+                          <td>{data.harga_beli}</td>
+                          <td>{data.harga_jual}</td>
+                          <td>{data.stok}</td>
+                          <td>
+                            {" "}
+                            <Button
+                              variant="primary"
+                              onClick={() => {
+                                // window.localStorage.setItem(
+                                //   "Nama",
+                                //   data.nama_barang
+                                // );
+                                // window.localStorage.setItem(
+                                //   "Beli",
+                                //   data.harga_beli
+                                // );
+                                // window.localStorage.setItem(
+                                //   "Jual",
+                                //   data.harga_jual
+                                // );
+                                // window.localStorage.setItem("Stok", data.stok);
 
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>Nama Barang</th>
-                    <th>Foto Barang</th>
-                    <th>Harga Beli</th>
-                    <th>Harga Jual</th>
-                    <th>Stok</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {barangData &&
-                    barangData.map((data, i) => (
-                      <tr>
-                        <td>{data.nama_barang}</td>
-                        <td>
-                          <img
-                            src={require(`../assets/images/${
-                              data.foto_barang
-                                ? data.foto_barang
-                                : `barang1.jpg`
-                            }`)}
-                            alt=""
-                            className="img-barang"
-                          />
-                        </td>
-                        <td>{data.harga_beli}</td>
-                        <td>{data.harga_jual}</td>
-                        <td>{data.stok}</td>
-                        <td>
-                          {" "}
-                          <Button
-                            variant="primary"
-                            onClick={() => {
-                              // window.localStorage.setItem(
-                              //   "Nama",
-                              //   data.nama_barang
-                              // );
-                              // window.localStorage.setItem(
-                              //   "Beli",
-                              //   data.harga_beli
-                              // );
-                              // window.localStorage.setItem(
-                              //   "Jual",
-                              //   data.harga_jual
-                              // );
-                              // window.localStorage.setItem("Stok", data.stok);
-
-                              setNamaEdit(data.nama_barang);
-                              setFotoEdit(data.foto_barang);
-                              setBeliEdit(data.harga_beli);
-                              setJualEdit(data.harga_jual);
-                              setStokEdit(data.stok);
-                              // window.localStorage.setItem("id", data.userid);
-                              // history.push(`/edit`);
-                              handleOpen4(data.id_barang);
-                            }}
-                          >
-                            Edit
-                          </Button>{" "}
-                          <Button
-                            variant="info"
-                            onClick={() => handleShow(data.id_barang)}
-                          >
-                            Lihat
-                          </Button>{" "}
-                          <Button
-                            variant="danger"
-                            onClick={() => handleOpen2(data.id_barang)}
-                          >
-                            Hapus
-                          </Button>{" "}
-                        </td>
-                      </tr>
-                    ))}
-                </tbody>
-              </Table>
+                                setNamaEdit(data.nama_barang);
+                                setFotoEdit(data.foto_barang);
+                                setBeliEdit(data.harga_beli);
+                                setJualEdit(data.harga_jual);
+                                setStokEdit(data.stok);
+                                // window.localStorage.setItem("id", data.userid);
+                                // history.push(`/edit`);
+                                handleOpen4(data.id_barang);
+                              }}
+                            >
+                              Edit
+                            </Button>{" "}
+                            <Button
+                              variant="info"
+                              onClick={() => handleShow(data.id_barang)}
+                            >
+                              Lihat
+                            </Button>{" "}
+                            <Button
+                              variant="danger"
+                              onClick={() => handleOpen2(data.id_barang)}
+                            >
+                              Hapus
+                            </Button>{" "}
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </Table>
+              )}
 
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
