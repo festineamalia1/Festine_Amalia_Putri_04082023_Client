@@ -127,7 +127,7 @@ export default function Home() {
     };
     axios
       .post(
-        `http://localhost/Festine_Amalia_Putri_04082023_PHP_Server/barang`,
+        `${API}/barang`,
         {
           nama_barang: nama,
           foto_barang: "barang5.jpg",
