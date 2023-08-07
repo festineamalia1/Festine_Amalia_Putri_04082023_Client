@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "54d70f67b90cf4f37cc60748f24ab31a",
+    "revision": "fe7785f512637c886d6dab9eab08b619",
     "url": "/Festine_Amalia_Putri_04082023_Client/index.html"
   },
   {
-    "revision": "a36e2f9b350df5ac999f",
+    "revision": "4304c44fd4a3cb4d9663",
     "url": "/Festine_Amalia_Putri_04082023_Client/static/css/main.ec86f750.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Festine_Amalia_Putri_04082023_Client/static/js/2.2e8db164.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "a36e2f9b350df5ac999f",
-    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/main.45bfb0b6.chunk.js"
+    "revision": "4304c44fd4a3cb4d9663",
+    "url": "/Festine_Amalia_Putri_04082023_Client/static/js/main.944528c3.chunk.js"
   },
   {
     "revision": "5dd8975803f86b7efcd5",
