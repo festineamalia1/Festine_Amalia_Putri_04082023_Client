@@ -87,7 +87,7 @@ export default function Home() {
 
   const fetchDataBarang = () => {
     axios
-      .get(`${API}/barangs`)
+      .get(`${API}/barang`)
       .then(function (response) {
         console.log(response);
         setBarangData(response.data.data);
@@ -111,7 +111,7 @@ export default function Home() {
 
   const handlDetailBarang = (id) => {
     axios
-      .get(`${API}/barangs/${id}`)
+      .get(`${API}/barang/${id}`)
       .then(function (response) {
         console.log(response);
         setDetailBarang(response.data.data[0]);
@@ -122,15 +122,24 @@ export default function Home() {
   };
 
   const handleTambah = () => {
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
     axios
-      .post(`${API}/barangs`, {
-        namabarang: nama,
-        foto: "barang5.jpg",
-        beli: beli,
-        jual: jual,
-        stok: stok,
-        admin: 1,
-      })
+      .post(
+        `http://localhost/Festine_Amalia_Putri_04082023_PHP_Server/barang`,
+        {
+          nama_barang: nama,
+          foto_barang: "barang5.jpg",
+          harga_beli: beli,
+          harga_jual: jual,
+          stok: stok,
+          admin: 1,
+        },
+        {
+          headers: headers,
+        }
+      )
       .then(function (response) {
         console.log(response);
         alert("tambah Data Berhasil");
@@ -145,31 +154,40 @@ export default function Home() {
   };
 
   const handleEdit = () => {
+    const headers = {
+      "Content-Type": "application/x-www-form-urlencoded",
+    };
     axios
-      .post(`${API}/barangs/edit/${idDelete}`, {
-        namabarang: namaEdit,
-        foto: "barang5.jpg",
-        beli: beliEdit,
-        jual: jualEdit,
-        stok: stokEdit,
-        admin: 1,
-      })
+      .post(
+        `${API}/barang/${idDelete}`,
+        {
+          nama_barang: namaEdit,
+          foto_barang: "barang5.jpg",
+          harga_beli: beliEdit,
+          harga_jual: jualEdit,
+          stok: stokEdit,
+          admin: 1,
+        },
+        {
+          headers: headers,
+        }
+      )
       .then(function (response) {
         console.log(response);
-        alert("tambah Data Berhasil");
+        alert("Edit Data Berhasil");
         window.location.reload();
       })
       .catch(function (error) {
         console.log(error);
         alert(
-          "tambah Data Gagal. Nama Barang Pastikan berbeda, untuk harga beli, harga jual dan stok hanya dapat di isi angka"
+          "Edit Data Gagal. Nama Barang Pastikan berbeda, untuk harga beli, harga jual dan stok hanya dapat di isi angka"
         );
       });
   };
 
   const handleDelete = () => {
     axios
-      .post(`${API}/barangs/delete/${idDelete}`)
+      .post(`${API}/barang/${idDelete}`)
       .then(function (response) {
         console.log(response);
         alert("hapus Data Berhasil");
